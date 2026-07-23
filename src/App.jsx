@@ -2,7 +2,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
 import PollDetails from "./pages/PollDetails";
-import NavBar from "./components/Navbar"
+import Results from "./pages/Results";
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         {/* <Route path="/create" element={<CreatePoll />} /> */}
         <Route path="/polls/:id" element={<PollDetails />}></Route>
+        <Route path="/polls/:id/results" element={<Results />}></Route>
       </Routes>
     </div>
   );
