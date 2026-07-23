@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import PollCard from "./../components/PollCard";
 
+
 const API_LOCAl_URL = "http://localhost:8000";
 
 function Home() {
