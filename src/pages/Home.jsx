@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PollCard from "./../components/PollCard";
+import AddPollCard from "./../components/AddPollCard";
 
 const API_LOCAl_URL = "http://localhost:8000";
 
@@ -19,13 +20,29 @@ function Home() {
       }
     }
     loadPolls();
-  });
+  }, []);
+
+  async function addPoll(newPoll) {
+    const response = await fetch(API_LOCAl_URL + `/api/polls`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newPoll),
+    });
+    const data = await response.json();
+    setPolls([...polls, data]);
+  }
 
   return (
     <div>
-      {polls.map((poll) => (
-        <PollCard key={poll.id} poll={poll}></PollCard>
-      ))}
+      <AddPollCard addPoll={addPoll}></AddPollCard>
+      <hr />
+      <div>
+        {polls.map((poll) => (
+          <PollCard key={poll.id} poll={poll}></PollCard>
+        ))}
+      </div>
     </div>
   );
 }
