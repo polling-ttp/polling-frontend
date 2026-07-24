@@ -23,25 +23,40 @@ function Home() {
     loadPolls();
   }, []); 
 
-  async function addPoll(newPoll) {
-    const response = await fetch(API_LOCAl_URL + `/api/polls`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newPoll),
-    });
-    const data = await response.json();
-    setPolls([...polls, data]);
-  }
+  //This was moved to CreatePoll to separate the pages and let them work with the Navbar
+  // async function addPoll(newPoll) {
+  //   const response = await fetch(API_LOCAl_URL + '/api/polls', {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(newPoll),
+  //   });
+  //   const data = await response.json();
+  //   setPolls([...polls, data]);
+  // }
 
+
+async function deletePoll(id) {
+  console.log("Deleting poll with id:", id);
+  try {
+    const response = await fetch(`${API_LOCAl_URL}/api/polls/${id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) throw new Error("Failed to delete poll");
+    setPolls((prev) => prev.filter((poll) => poll.id !== id));
+  } catch (err) {
+    setError(err.message);
+  }
+}
   return (
     <div>
-      <AddPollCard addPoll={addPoll}></AddPollCard>
+      {/* <AddPollCard addPoll={addPoll}></AddPollCard> */}
       <hr />
       <div>
         {polls.map((poll) => (
-          <PollCard key={poll.id} poll={poll}></PollCard>
+          <PollCard key={poll.id} poll={poll} onDelete={deletePoll} />
+          // <PollCard key={poll.id} poll={poll}></PollCard>
         ))}
       </div>
     </div>
