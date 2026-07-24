@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function PollCard({ poll }) {
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="poll_holder">
       <li key={poll.id}>
         {poll.title} {poll.description}
       </li>
