@@ -10,7 +10,7 @@ function Results() {
   const API_URL = "http://localhost:8000";
 
   useEffect(() => {
-    const url = API_URL + `/api/polls/${id}`;
+    const url = API_URL + `/polls/${id}`;
     async function getResults() {
       try {
         const response = await fetch(url);

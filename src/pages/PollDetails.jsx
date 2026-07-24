@@ -12,7 +12,7 @@ function PollDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const url = API_URL + `/api/polls/${Number(id)}`;
+    const url = API_URL + `/polls/${Number(id)}`;
     async function getOptions() {
       try {
         const response = await fetch(url);
@@ -29,7 +29,7 @@ function PollDetails() {
   }, []);
 
   async function addVote(optionId) {
-    const url = API_URL + `/api/votes`;
+    const url = API_URL + `/api/polls/${optionId}/vote`;
     const newVote = {
       optionId,
     };
@@ -67,4 +67,4 @@ function PollDetails() {
   );
 }
 
-export default Details;
+export default PollDetails;

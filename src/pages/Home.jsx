@@ -12,7 +12,7 @@ function Home() {
   useEffect(() => {
     async function loadPolls() {
       try {
-        const response = await fetch(API_LOCAl_URL + "/polls");
+        const response = await fetch("http://localhost:8000/api/polls");
         if (!response.ok) throw new Error("Failed to Load the Polls.");
         const data = await response.json();
         setPolls([...data]);
@@ -21,7 +21,7 @@ function Home() {
       }
     }
     loadPolls();
-  }, []);
+  }, []); 
 
   async function addPoll(newPoll) {
     const response = await fetch(API_LOCAl_URL + `/api/polls`, {

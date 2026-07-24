@@ -7,7 +7,7 @@ import Results from "./pages/Results";
 function App() {
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <h1>Poll App</h1>
       <Routes>
         <Route path="/" element={<Home />}></Route>
