@@ -5,10 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 const API_LOCAl_URL = "http://localhost:8000";
 
-function Home() {
+function Polls() {
   const [polls, setPolls] = useState([]);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadPolls() {
@@ -24,24 +23,14 @@ function Home() {
     loadPolls();
   }, []);
 
-  async function addPoll(newPoll) {
-    const response = await fetch(API_LOCAl_URL + `/api/polls`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newPoll),
-    });
-    const data = await response.json();
-    setPolls([...polls, data]);
-  }
-
   return (
-    <div>
-      <AddPollCard addPoll={addPoll}></AddPollCard>
-      <button onClick={() => navigate("/polls")}>See Polls</button>
-    </div>
+    <>
+      <h1>Polls Here</h1>
+      {polls.map((poll) => (
+        <PollCard key={poll.id} poll={poll}></PollCard>
+      ))}
+    </>
   );
 }
 
-export default Home;
+export default Polls;
