@@ -2,16 +2,16 @@
 
 .sidebar{
     width:220px;
-    height:100vh;
+    height:auto;
     background-color: rgb(59, 6, 59);
     padding: 24px;
 }
 
 .sidebar-logo{
     margin: 24px;
-    font-size: 18px;
+    font-size: 28px;
     font-weight: 600;
-    color:black;
+    color:white;
 }
 
 .sidebar-links{
@@ -24,10 +24,11 @@
 
 .sidebar-links a{
     display:block;
-    font-size:15px;
+    font-size:20px;
     color: rgb(234, 225, 234);
     border-radius: 4px;
     text-decoration:none;
+    margin: 18px;
 }
 
 .sidebar-links a.active{

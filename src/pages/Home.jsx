@@ -23,18 +23,7 @@ function Home() {
     loadPolls();
   }, []);
 
-  //This was moved to CreatePoll to separate the pages and let them work with the Navbar
-  // async function addPoll(newPoll) {
-  //   const response = await fetch(API_LOCAl_URL + '/api/polls', {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newPoll),
-  //   });
-  //   const data = await response.json();
-  //   setPolls([...polls, data]);
-  // }
+
 
 
 async function deletePoll(id) {
@@ -52,6 +41,7 @@ async function deletePoll(id) {
   return (
     <div>
       {/* <AddPollCard addPoll={addPoll}></AddPollCard> */}
+      <h1> Poll App </h1>
       <hr />
       <div>
         {polls.map((poll) => (

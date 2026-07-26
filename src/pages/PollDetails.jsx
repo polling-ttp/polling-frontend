@@ -3,7 +3,9 @@ import { useParams } from "react-router";
 import OptionCard from "../components/OptionCard";
 import { useNavigate } from "react-router";
 
+
 function PollDetails() {
+  const [poll, setPoll] = useState(null);
   const [options, setOptions] = useState([]);
   const [votes, setVotes] = useState([]);
   const [error, setError] = useState(null);
@@ -18,6 +20,7 @@ function PollDetails() {
         const response = await fetch(url);
         if (!response.ok) throw new Error("Failed to Get Options.");
         const data = await response.json();
+        setPoll(data)
         setOptions([...data.Options]);
         setVotes([...data.Options.Votes]);
       } catch (error) {
@@ -48,10 +51,13 @@ function PollDetails() {
     }
   }
 
+    if (!poll) return <p>Loading...</p>;
+
   return (
     <div>
-      <h1>Poll Details</h1>
-      <div>
+      <h1>{poll.title}</h1>
+      <p>{poll.description}</p>
+      <div className="options-grid">
         {options.map((option) => (
           <OptionCard
             key={option.id}

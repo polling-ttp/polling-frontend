@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PollDetails from '../pages/PollDetails'
+
 function AddPollCard({ addPoll }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -57,7 +57,7 @@ function AddPollCard({ addPoll }) {
     value={option}
     onChange={(e) => setOption(e.target.value)}
   />
-  <button type="button" onClick={addOptions}>
+  <button type="button" onClick={addOptions} style={{margin: 8}}>
     Add Options
   </button>
 </div>
