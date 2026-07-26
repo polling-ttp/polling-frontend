@@ -1,0 +1,21 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color:rgb(74, 2, 82);
+}
+
+.app-content {
+  flex: 1;
+  padding: 24px;
+  box-sizing: border-box;
+}
+.options-grid {
+  display: flex;
+  flex-direction:column;
+  gap: 8px;
+  align-items: center;
+}
+
+.options-grid button{
+    width: 350px;
+}
