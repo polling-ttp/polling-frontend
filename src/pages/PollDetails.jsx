@@ -28,25 +28,16 @@ function PollDetails() {
     getOptions();
   }, []);
 
-  async function addVote(optionId) {
-    const url = API_URL + `/api/polls/${optionId}/vote`;
-    const newVote = {
-      optionId,
-    };
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newVote),
-      });
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      setError(error.message);
-    }
+ async function addVote(optionId) {
+  const url = `${API_URL}/api/polls/${optionId}/vote`;
+  try {
+    const response = await fetch(url, { method: "POST" });
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    setError(error.message);
   }
+}
 
   return (
     <div>
