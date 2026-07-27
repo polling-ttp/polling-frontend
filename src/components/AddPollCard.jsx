@@ -20,10 +20,11 @@ function AddPollCard({ addPoll }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-     const newPoll = {
+    if (!title.trim() || !description.trim() || options.length < 2) return;
+    const newPoll = {
       poll: { title, description },
       options: options.map((opt) => opt.text),
-     }
+    };
     addPoll(newPoll);
   }
 
@@ -34,52 +35,83 @@ function AddPollCard({ addPoll }) {
   // console.log(newPoll);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>Enter New Poll For More Fun</label>
-        <hr />
+    <section className="page narrow-page">
+      <header className="page-header left-aligned">
+        <span className="eyebrow">Start a conversation</span>
+        <h1>Create a poll</h1>
+        <p>Write a clear question and add at least two choices.</p>
+      </header>
+      <form className="poll-form" onSubmit={handleSubmit}>
+        <div className="form-field">
+          <label htmlFor="poll-title">Poll title</label>
         <input
+          id="poll-title"
           type="text"
-          placeholder="Enter Poll Tilte"
+          placeholder="What would you like to ask?"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
+        </div>
+        <div className="form-field">
+          <label htmlFor="poll-description">Description</label>
         <input
+          id="poll-description"
           type="text"
-          placeholder="Enter Poll Description"
+          placeholder="Add a little context"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          required
         />
-       <div>
-  <input
-    type="text"
-    placeholder="Enter Options"
-    value={option}
-    onChange={(e) => setOption(e.target.value)}
-  />
-  <button type="button" onClick={addOptions} style={{margin: 8}}>
-    Add Options
-  </button>
-</div>
-
-{options.length > 0 && (
-  <ul>
-    {options.map((opt, i) => (
-      <li key={i}>
-        {opt.text}
+        </div>
+        <div className="form-field">
+          <label htmlFor="poll-option">Answer choices</label>
+          <div className="option-entry">
+            <input
+              id="poll-option"
+              type="text"
+              placeholder="Add an option"
+              value={option}
+              onChange={(e) => setOption(e.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  addOptions();
+                }
+              }}
+            />
+            <button className="button secondary-button" type="button" onClick={addOptions}>
+              Add
+            </button>
+          </div>
+        </div>
+        {options.length > 0 && (
+          <ul className="option-list">
+            {options.map((item, index) => (
+              <li key={`${item.text}-${index}`}>
+                {item.text}
+                <button
+                  className="button danger-button"
+                  type="button"
+                  onClick={() =>
+                    setOptions(options.filter((_, itemIndex) => itemIndex !== index))
+                  }
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
         <button
-          type="button"
-          onClick={() => setOptions(options.filter((_, idx) => idx !== i))}
+          className="button primary-button"
+          type="submit"
+          disabled={options.length < 2}
         >
-          Remove
+          Create poll
         </button>
-      </li>
-    ))}
-  </ul>
-)}
-        <button type="submit">Submit Poll</button>
       </form>
-    </div>
+    </section>
   );
 }
 

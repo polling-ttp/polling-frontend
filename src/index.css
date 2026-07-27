@@ -1,190 +1,51 @@
 :root {
-  --text: #ffffff;
-  --text-h: #ffffff;
-  --bg: #232a20;
-  --border: #4c5d4d;
-  --code-bg: #1f2a20;
-  --accent: #cca866;
-  --accent-bg: rgba(204, 168, 102, 0.15);
-  --accent-border: rgba(204, 168, 102, 0.5);
-  --social-bg: rgba(60, 70, 56, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.2) 0 10px 15px -3px, rgba(0, 0, 0, 0.12) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172235;
+  background: #f6f7fb;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --navy: #172235;
+  --muted: #697386;
+  --surface: #ffffff;
+  --border: #e2e6ee;
+  --purple: #6d4aff;
+  --purple-dark: #5535e8;
+  --purple-soft: #f0edff;
+  --danger: #c93b52;
+  --success: #18794e;
+  --shadow: 0 18px 50px rgba(37, 42, 69, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #ffffff;
-    --text-h: #ffffff;
-    --bg: #232a20;
-    --border: #3c4638;
-    --code-bg: #2b3327;
-    --accent: #d9b878;
-    --accent-bg: rgba(217, 184, 120, 0.15);
-    --accent-border: rgba(217, 184, 120, 0.5);
-    --social-bg: rgba(60, 70, 56, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  min-height: 100vh;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+button,
+input {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(109, 74, 255, 0.3);
+  outline-offset: 2px;
 }
 
 h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  font-weight: 650;
-  letter-spacing: -1.68px;
-  margin: 36px 0 12px;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  font-weight: 600;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-h3 {
-  width: min(100% - 32px, 560px);
-  margin: 32px auto 12px;
-  color: var(--text-h);
-}
+h2,
 p {
-  width: min(100% - 32px, 560px);
-  margin: 0 auto;
-}
-
-h3 ~ div {
-  width: min(100% - 32px, 560px);
-  margin: 8px auto;
-  padding: 12px 16px;
-  text-align: left;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-
-h3 ~ div:hover {
-  background: var(--accent-bg);
-}
-
-form,
-ul {
-  list-style: none;
-  width: min(100% - 32px, 560px);
-  margin: 32px auto;
-  padding: 24px;
-  text-align: left;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  box-sizing: border-box;
-  box-shadow: var(--shadow);
-}
-
-form {
-  display: grid;
-  gap: 12px;
-  border: 1px solid var(--border);
-}
-
-label,
-li {
-  color: var(--text-h);
-}
-
-input,
-button {
-  padding: 10px 12px;
-  font: inherit;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-
-input {
-  width: 100%;
-  color: var(--text-h);
-  background: var(--bg);
-}
-
-button {
-  cursor: pointer;
-  color: var(--text-h);
-  background: var(--accent);
-  margin: 4px;
-}
-
-button:hover {
-  opacity: 0.75;
-}
-
-hr {
-  width: min(100% - 32px, 560px);
-  border: 0;
-  border-top: 1px solid var(--border);
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+  margin-top: 0;
 }
