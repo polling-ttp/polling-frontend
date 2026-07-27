@@ -8,18 +8,15 @@ import Navbar from "./components/NavBar";
 
 function App() {
   return (
-    // Fetch-file
-    <div className="app-layout">
-      <Navbar />
+      <div className="app-layout">
+        <Navbar />
       <main className="app-content">
-        <h1>Poll App</h1>
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          {/* <Route path="/create" element={<CreatePoll />} /> */}
-          <Route path="/polls/:id" element={<PollDetails />}></Route>
-          <Route path="/create" element={<CreatePoll />}></Route>
-          <Route path="/polls/:id/results" element={<Results />}></Route>
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/polls/:id" element={<PollDetails />}></Route>
+        <Route path='/create' element={<CreatePoll />}></Route>
+        <Route path="/polls/:id/results" element={<Results />}></Route>
+      </Routes>
       </main>
     </div>
   );
