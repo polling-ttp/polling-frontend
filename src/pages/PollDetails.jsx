@@ -14,7 +14,7 @@ function PollDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const url = API_URL + `/api/polls/${Number(id)}`;
+    const url = API_URL + `/polls/${Number(id)}`;
     async function getOptions() {
       try {
         const response = await fetch(url);
@@ -31,25 +31,16 @@ function PollDetails() {
     getOptions();
   }, []);
 
-  async function addVote(optionId) {
-    const url = API_URL + `/api/votes`;
-    const newVote = {
-      optionId,
-    };
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newVote),
-      });
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      setError(error.message);
-    }
+ async function addVote(optionId) {
+  const url = `${API_URL}/api/polls/${optionId}/vote`;
+  try {
+    const response = await fetch(url, { method: "POST" });
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    setError(error.message);
   }
+}
 
     if (!poll) return <p>Loading...</p>;
 

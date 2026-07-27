@@ -3,10 +3,10 @@ import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
 import PollDetails from "./pages/PollDetails";
 import Results from "./pages/Results";
-import CreatePoll from './components/CreatePoll'
-import Navbar from './components/NavBar'
+import CreatePoll from "./components/CreatePoll";
+import Navbar from "./components/NavBar";
 
-function App(){
+function App() {
   return (
       <div className="app-layout">
         <Navbar />
@@ -19,7 +19,7 @@ function App(){
       </Routes>
       </main>
     </div>
-  )
+  );
 }
 
 export default App;

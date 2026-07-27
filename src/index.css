@@ -1,15 +1,15 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
+  --text: #ffffff;
+  --text-h: #ffffff;
+  --bg: #232a20;
+  --border: #4c5d4d;
+  --code-bg: #1f2a20;
+  --accent: #cca866;
+  --accent-bg: rgba(204, 168, 102, 0.15);
+  --accent-border: rgba(204, 168, 102, 0.5);
+  --social-bg: rgba(60, 70, 56, 0.5);
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    rgba(0, 0, 0, 0.2) 0 10px 15px -3px, rgba(0, 0, 0, 0.12) 0 4px 6px -2px;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -32,15 +32,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
+    --text: #ffffff;
+    --text-h: #ffffff;
+    --bg: #232a20;
+    --border: #3c4638;
+    --code-bg: #2b3327;
+    --accent: #d9b878;
+    --accent-bg: rgba(217, 184, 120, 0.15);
+    --accent-border: rgba(217, 184, 120, 0.5);
+    --social-bg: rgba(60, 70, 56, 0.5);
     --shadow:
       rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
   }
@@ -120,7 +120,7 @@ h3 ~ div:hover {
 
 form,
 ul {
-  list-style:none;
+  list-style: none;
   width: min(100% - 32px, 560px);
   margin: 32px auto;
   padding: 24px;
@@ -128,14 +128,13 @@ ul {
   border: 1px solid var(--border);
   border-radius: 8px;
   box-sizing: border-box;
-  box-shadow:0 8px 16px#f7f7f9;
+  box-shadow: var(--shadow);
 }
 
 form {
   display: grid;
   gap: 12px;
-  box-shadow:0 8px 16px#0f0f10;
-  border: 4px solid black;
+  border: 1px solid var(--border);
 }
 
 label,
@@ -160,13 +159,13 @@ input {
 
 button {
   cursor: pointer;
-  color: white;
+  color: var(--text-h);
   background: var(--accent);
   margin: 4px;
 }
 
 button:hover {
-  opacity: 0.6;
+  opacity: 0.75;
 }
 
 hr {
