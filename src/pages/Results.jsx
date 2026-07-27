@@ -1,100 +1,70 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import "./ResultsPage.css";
+import { API_URL } from "../api";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
-
-function ResultsPage() {
-  const { id } = useParams();
-  const pollId = id ? Number(id) : null;
-  const [votes, setVotes] = useState([]);
-  const [loading, setLoading] = useState(true);
+function Results() {
+  const [poll, setPoll] = useState(null);
   const [error, setError] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
-    if (!pollId || Number.isNaN(pollId)) {
-      setLoading(false);
-      setError("Missing or invalid poll ID.");
-      return;
-    }
-
-    const url = `${API_URL}/polls/${pollId}/votes`;
-
+    const url = API_URL + `/api/polls/${id}`;
     async function getResults() {
       try {
-        setLoading(true);
-        setError(null);
         const response = await fetch(url);
-        if (!response.ok) {
-          const body = await response.text().catch(() => "");
-          throw new Error(
-            `Request failed (${response.status}): ${body || response.statusText}`,
-          );
-        }
-        const data = await response.json(); // array of { voteId, optionId, optionLabel }
-
-        // Group votes by option and count them
-        const counts = {};
-        data.forEach((v) => {
-          const key = v.optionId;
-          if (!counts[key]) {
-            counts[key] = { label: v.optionLabel, votes: 0 };
-          }
-          counts[key].votes += 1;
-        });
-
-        setVotes(Object.values(counts));
-      } catch (err) {
-        console.error("Results fetch error:", err);
-        setError(
-          err instanceof TypeError
-            ? "Could not reach the server. Check your connection or the API URL."
-            : err.message,
-        );
-      } finally {
-        setLoading(false);
+        if (!response.ok) throw new Error("Failed to Load the results.");
+        const data = await response.json();
+        setPoll(data);
+      } catch (error) {
+        setError(error.message);
       }
     }
-
     getResults();
-  }, [pollId]);
+  }, [id]);
 
-  const totalVotes = votes.reduce((sum, v) => sum + v.votes, 0);
+  if (error) return <div className="message error-message">{error}</div>;
+  if (!poll) return <div className="message">Loading results…</div>;
 
-  if (loading) return <div className="results-loading">Loading results…</div>;
-  if (error) return <div className="results-error">{error}</div>;
+  const totalVotes = poll.Options.reduce(
+    (total, option) => total + option.Votes.length,
+    0,
+  );
 
   return (
-    <div className="results-page">
-      <div className="results-card">
-        <div className="vote-bars">
-          {votes.map((item, index) => {
-            const pct = totalVotes > 0 ? (item.votes / totalVotes) * 100 : 0;
-            return (
-              <div className="bar-row" key={index}>
-                <div className="bar-label-row">
-                  <span className="bar-label">{item.label}</span>
-                  <span className="bar-count">
-                    {item.votes} vote{item.votes !== 1 ? "s" : ""}
-                  </span>
-                </div>
-                <div className="bar-track">
-                  <div className="bar-fill" style={{ width: `${pct}%` }} />
-                </div>
-                <div className="bar-meta">
-                  <span className="bar-pct">{pct.toFixed(1)}%</span>
-                </div>
+    <section className="page narrow-page">
+      <header className="page-header left-aligned">
+        <span className="eyebrow">{totalVotes} total votes</span>
+        <h1>{poll.title}</h1>
+        <p>{poll.description}</p>
+      </header>
+      {poll.Options.length === 0 && (
+        <div className="empty-state">
+          <h2>No results yet</h2>
+          <p>This poll does not have any answer choices.</p>
+        </div>
+      )}
+      <div className="results-list">
+        {poll.Options.map((option) => {
+          const votes = option.Votes.length;
+          const percentage = totalVotes ? Math.round((votes / totalVotes) * 100) : 0;
+          return (
+            <article className="result-row" key={option.id}>
+              <div className="result-label">
+                <strong>{option.text}</strong>
+                <span>{votes} {votes === 1 ? "vote" : "votes"} · {percentage}%</span>
               </div>
-            );
-          })}
-        </div>
-
-        <div className="results-footer">
-          <strong>Total votes:</strong> {totalVotes}
-        </div>
+              <div className="result-track">
+                <div className="result-fill" style={{ width: `${percentage}%` }} />
+              </div>
+            </article>
+          );
+        })}
       </div>
-    </div>
+      <button className="button primary-button" onClick={() => window.history.back()}>
+        Back to poll
+      </button>
+    </section>
   );
 }
 
-export default ResultsPage;
+export default Results;
